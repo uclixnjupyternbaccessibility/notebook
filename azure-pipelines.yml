@@ -42,16 +42,9 @@ steps:
       sudo ln -sf `pwd`/bin/casperjs /usr/local/bin/casperjs
       echo 'casperjs and phantomjs installed'
       
-      sudo apt-get install libc6 libstdc++6 libgcc1 libgtk2.0-0 libasound2 libxrender1
-      sudo apt-get install xvfb
-      apt-get install firefox
-      cd ~
-      export SLIMER_JS="slimerjs-1.0.0"
-      wget https://download.slimerjs.org/releases/1.0.0/slimerjs-1.0.0.tar.bz2
-      sudo tar xvjf slimerjs-1.0.0.tar.bz2
-      sudo mv slimerjs-1.0.0 /usr/local/share
-      sudo ln -sf /usr/local/share/slimerjs-1.0.0S/slimerjs /usr/local/bin
-      export SLIMERJSLAUNCHER=/usr/bin/firefox
+      git clone https://github.com/laurentj/slimerjs.git
+      cd slimerjs
+      sudo ln -sf `pwd`/bin/slimerjs /usr/local/bin/slimerjs
 
       pip install -r docs/doc-requirements.txt
       pip install --upgrade pytest
@@ -86,9 +79,9 @@ steps:
           true
       fi
       python -m notebook.jstest js/notebook
-      python -m notebook.jstest python
-      python -m notebook.jstest js/base
-      python -m notebook.jstest js/services
+      # python -m notebook.jstest python
+      # python -m notebook.jstest js/base
+      # python -m notebook.jstest js/services
 
       # nosetests -v --exclude-dir notebook/tests/selenium --with-coverage --cover-package=notebook notebook
       # py.test -sv notebook/tests/selenium
