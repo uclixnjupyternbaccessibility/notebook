@@ -37,11 +37,11 @@ steps:
       npm --version
       npm upgrade -g npm
       npm install
-      cd /var/www/
       git clone git://github.com/n1k0/casperjs.git
       cd casperjs
       sudo ln -sf `pwd`/bin/casperjs /usr/local/bin/casperjs
       echo 'casperjs and phantomjs installed'
+      npm install slimerjs
       pip install -r docs/doc-requirements.txt
       pip install --upgrade pytest
       pip install --upgrade selenium pytest
