@@ -4,17 +4,12 @@
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
+#TODO: remove this so it triggers on all branches
 trigger:
 - master
 
 pool:
   vmImage: 'ubuntu-latest'
-
-steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '10.x'
-  displayName: 'Install Node.js'
 
 - task: UsePythonVersion@0
   inputs:
@@ -23,10 +18,26 @@ steps:
     architecture: 'x64'
 
 - script: |
-    npm install
-    npm run build
-  displayName: 'npm install and build'
+      python -m pip install --upgrade pip 
+      pip3 install --upgrade setuptools
+      pip install -e .[dev]
+    displayName: 'Upgrade pip and python
+    continueOnError: false
 
-- script:
-    python -m notebook.jstest 
-  displayName: 'run notebook tests'
+- script: |
+      pip install pytest pytest-runner
+    displayName: 'Install test dependencies'
+    continueOnError: false
+
+      # Run Tests
+- script: |
+      py.test tests --cache-clear --junitxml=result.xml
+    displayName: 'Run tests'
+    continueOnError: false
+
+# Print test results
+- task: PrintTestResults
+    inputs:
+      testResultsFiles: 'result.xml'
+      testRunTitle: 'Python Tests'
+      condition: succeededOrFailed()
