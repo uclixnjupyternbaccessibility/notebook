@@ -22,23 +22,23 @@ steps:
       python -m pip install --upgrade pip 
       pip3 install --upgrade setuptools
       pip install -e .[dev]
-    displayName: 'Upgrade pip and python'
-    continueOnError: false
+  displayName: 'Upgrade pip and python'
+  continueOnError: false
 
 - script: |
       pip install pytest pytest-runner
-    displayName: 'Install test dependencies'
-    continueOnError: false
+  displayName: 'Install test dependencies'
+  continueOnError: false
 
-      # Run Tests
+# Run Tests
 - script: |
       py.test tests --cache-clear --junitxml=result.xml
-    displayName: 'Run tests'
-    continueOnError: false
+  displayName: 'Run tests'
+  continueOnError: false
 
 # Print test results
-- task: PrintTestResults
-    inputs:
-      testResultsFiles: 'result.xml'
-      testRunTitle: 'Python Tests'
-      condition: succeededOrFailed()
+- task: PublishTestResults@2
+  inputs:
+    testResultsFiles: 'result.xml'
+    testRunTitle: 'Python Tests'
+    condition: succeededOrFailed()
