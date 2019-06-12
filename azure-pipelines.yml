@@ -47,7 +47,7 @@ steps:
       apt-get install firefox
       cd ~
       export SLIMER_JS="slimerjs-0.10.3"
-      wget http://download.slimerjs.org/releases/latest-slimerjs-stable/$SLIMER_JS.tar.bz2
+      wget https://download.slimerjs.org/releases/1.0.0/slimerjs-1.0.0.tar.bz2
       sudo tar xvjf $SLIMER_JS.tar.bz2
       sudo mv $SLIMER_JS /usr/local/share
       sudo ln -sf /usr/local/share/$SLIMER_JS/slimerjs /usr/local/bin
