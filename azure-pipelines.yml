@@ -46,11 +46,11 @@ steps:
       sudo apt-get install xvfb
       apt-get install firefox
       cd ~
-      export SLIMER_JS="slimerjs-0.10.3"
+      export SLIMER_JS="slimerjs-1.0.0"
       wget https://download.slimerjs.org/releases/1.0.0/slimerjs-1.0.0.tar.bz2
-      sudo tar xvjf $SLIMER_JS.tar.bz2
-      sudo mv $SLIMER_JS /usr/local/share
-      sudo ln -sf /usr/local/share/$SLIMER_JS/slimerjs /usr/local/bin
+      sudo tar xvjf slimerjs-1.0.0.tar.bz2
+      sudo mv slimerjs-1.0.0 /usr/local/share
+      sudo ln -sf /usr/local/share/slimerjs-1.0.0S/slimerjs /usr/local/bin
       export SLIMERJSLAUNCHER=/usr/bin/firefox
 
       pip install -r docs/doc-requirements.txt
