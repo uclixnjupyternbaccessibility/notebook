@@ -41,8 +41,18 @@ steps:
       cd casperjs
       sudo ln -sf `pwd`/bin/casperjs /usr/local/bin/casperjs
       echo 'casperjs and phantomjs installed'
-      npm install slimerjs
+      
+      sudo apt-get install libc6 libstdc++6 libgcc1 libgtk2.0-0 libasound2 libxrender1
+      sudo apt-get install xvfb
+      apt-get install firefox
+      cd ~
+      export SLIMER_JS="slimerjs-0.10.3"
+      wget http://download.slimerjs.org/releases/latest-slimerjs-stable/$SLIMER_JS.tar.bz2
+      sudo tar xvjf $SLIMER_JS.tar.bz2
+      sudo mv $SLIMER_JS /usr/local/share
+      sudo ln -sf /usr/local/share/$SLIMER_JS/slimerjs /usr/local/bin
       export SLIMERJSLAUNCHER=/usr/bin/firefox
+
       pip install -r docs/doc-requirements.txt
       pip install --upgrade pytest
       pip install --upgrade selenium pytest
