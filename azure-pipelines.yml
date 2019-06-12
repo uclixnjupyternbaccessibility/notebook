@@ -28,16 +28,12 @@ steps:
 - script: |
       pip3 install pytest pytest-runner
       pip3 install requests
-      sudo apt-get install build-essential chrpath libssl-dev libxft-dev
-      sudo apt-get install libfreetype6 libfreetype6-dev libfontconfig1 libfontconfig1-dev
-      wget https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2
-      tar xvjf phantomjs-2.1.1-linux-x86_64.tar.bz2 -C /usr/local/share/
-      sudo ln -sf /usr/local/share/phantomjs-2.1.1-linux-x86_64/bin/phantomjs /usr/local/bin
-      cd /usr/local/share
-      sudo git clone -b master git://github.com/n1k0/casperjs.git
-      cd casperjs
-      sudo ln -sf `pwd`/bin/casperjs /usr/local/bin/casperjs
+      npm install phantomjs
+      echo 'phantomjs INSTALLED'
+      npm install casperjs
+      echo 'casperjs INSTALLED'
       npm install slimerjs
+      echo 'slimerjs INSTALLED'
   displayName: 'Install test dependencies'
   continueOnError: false
 
