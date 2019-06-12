@@ -43,7 +43,7 @@ steps:
       echo 'casperjs and phantomjs installed'
       
       wget https://github.com/laurentj/slimerjs/releases/download/1.0.0/slimerjs-1.0.0.tar.bz2
-      tar -xzf slimerjs-1.0.0.tar.bz2
+      tar -xvjf slimerjs-1.0.0.tar.bz2
       cd slimerjs-1.0.0
       sudo ln -sf `pwd`/bin/slimerjs-1.0.0 /usr/local/bin/slimerjs-1.0.0
       apt-get install firefox
