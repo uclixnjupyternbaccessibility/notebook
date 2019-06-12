@@ -37,7 +37,6 @@ steps:
       sudo git clone -b master git://github.com/n1k0/casperjs.git
       cd casperjs
       sudo ln -sf `pwd`/bin/casperjs /usr/local/bin/casperjs
-      sudo apt-get install libc6 libstdc++6 libgcc1 libgtk2.0-0 libasound2 libxrender1 libdbus-glib-1-2
       npm install slimerjs
   displayName: 'Install test dependencies'
   continueOnError: false
