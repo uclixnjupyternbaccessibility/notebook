@@ -42,6 +42,7 @@ steps:
       sudo ln -sf `pwd`/bin/casperjs /usr/local/bin/casperjs
       echo 'casperjs and phantomjs installed'
       npm install slimerjs
+      export SLIMERJSLAUNCHER=/usr/bin/firefox
       pip install -r docs/doc-requirements.txt
       pip install --upgrade pytest
       pip install --upgrade selenium pytest
