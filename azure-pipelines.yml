@@ -37,8 +37,10 @@ steps:
       npm --version
       npm upgrade -g npm
       npm install
-      # git clone git://github.com/n1k0/casperjs.git
-      # ln -sf ~/casperjs/bin/casperjs ~/bin/casperjs
+      cd /var/www/
+      git clone git://github.com/n1k0/casperjs.git
+      cd casperjs
+      sudo ln -sf `pwd`/bin/casperjs /usr/local/bin/casperjs
       echo 'casperjs and phantomjs installed'
       pip install -r docs/doc-requirements.txt
       pip install --upgrade pytest
@@ -71,12 +73,12 @@ steps:
       else
           true
       fi
-      # python -m notebook.jstest js/notebook
-      # python -m notebook.jstest python
-      # python -m notebook.jstest js/base
-      # python -m notebook.jstest js/services
+      python -m notebook.jstest js/notebook
+      python -m notebook.jstest python
+      python -m notebook.jstest js/base
+      python -m notebook.jstest js/services
 
-      nosetests -v --exclude-dir notebook/tests/selenium --with-coverage --cover-package=notebook notebook
+      # nosetests -v --exclude-dir notebook/tests/selenium --with-coverage --cover-package=notebook notebook
       # py.test -sv notebook/tests/selenium
       # |
       # if [[ $GROUP == docs ]]; then
