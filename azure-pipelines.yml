@@ -42,9 +42,12 @@ steps:
       sudo ln -sf `pwd`/bin/casperjs /usr/local/bin/casperjs
       echo 'casperjs and phantomjs installed'
       
-      git clone https://github.com/laurentj/slimerjs.git
-      cd slimerjs
-      sudo ln -sf `pwd`/bin/slimerjs /usr/local/bin/slimerjs
+      wget https://github.com/laurentj/slimerjs/releases/download/1.0.0/slimerjs-1.0.0.tar.bz2
+      tar -xzf slimerjs-1.0.0.tar.bz2
+      cd slimerjs-1.0.0
+      sudo ln -sf `pwd`/bin/slimerjs-1.0.0 /usr/local/bin/slimerjs-1.0.0
+      apt-get install firefox
+      export SLIMERJSLAUNCHER=/usr/bin/firefox
 
       pip install -r docs/doc-requirements.txt
       pip install --upgrade pytest
