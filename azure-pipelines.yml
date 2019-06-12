@@ -32,13 +32,13 @@ steps:
 
 # Run Tests
 - script: |
-      py.test tests --cache-clear --junitxml=result.xml
+      python -m notebook.jstest 
   displayName: 'Run tests'
   continueOnError: false
 
 # Print test results
-- task: PublishTestResults@2
-  inputs:
-    testResultsFiles: 'result.xml'
-    testRunTitle: 'Python Tests'
-    condition: succeededOrFailed()
+# - task: PublishTestResults@2
+#   inputs:
+#     testResultsFiles: 'result.xml'
+#     testRunTitle: 'Python Tests'
+#     condition: succeededOrFailed()
