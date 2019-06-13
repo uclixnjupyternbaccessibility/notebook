@@ -8,6 +8,10 @@
 trigger:
 - master
 
+variables:
+  JUPYTER_TEST_BROWSER: firefox
+  MOZ_HEADLESS: 1
+
 pool:
   vmImage: 'ubuntu-latest'
 
