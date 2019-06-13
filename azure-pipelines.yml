@@ -33,13 +33,16 @@ steps:
       cd ..
       echo 'casperjs and phantomjs installed'
       
+      sudo apt-get install libc6 libstdc++6 libgcc1 libgtk2.0-0 libasound2 libxrender1 libdbus-glib-1-2
       sudo apt-get install firefox
       echo 'FIREFOX INSTALLED'
       wget https://github.com/laurentj/slimerjs/releases/download/1.0.0/slimerjs-1.0.0.tar.bz2
       tar -xvjf slimerjs-1.0.0.tar.bz2
-      cd slimerjs-1.0.0
-      sudo ln -sf `pwd`/bin/slimerjs-1.0.0 /usr/local/bin/slimerjs-1.0.0
-      cd ..
+      #   cd slimerjs-1.0.0
+      sudo mv slimerjs-1.0.0 /usr/local/share
+      #   sudo ln -sf `pwd`/bin/slimerjs-1.0.0 /usr/local/bin/slimerjs-1.0.0
+      sudo ln -sf /usr/local/share/slimerjs-1.0.0/slimerjs /usr/local/bin
+      #   cd ..
       export SLIMERJSLAUNCHER=/usr/bin/firefox
 
       pip install -r docs/doc-requirements.txt
