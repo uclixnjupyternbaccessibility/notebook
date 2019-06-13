@@ -82,7 +82,7 @@ steps:
       else
           true
       fi
-      python -m notebook.jstest js/notebook
+      python -m notebook.jstest base
       # python -m notebook.jstest python
       # python -m notebook.jstest js/base
       # python -m notebook.jstest js/services
