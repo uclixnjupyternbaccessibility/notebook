@@ -51,7 +51,7 @@ steps:
       cd geckodriver
       cp geckodriver /usr/local/bin
       cd ..
-    #   export PATH=$PATH:$PWD/geckodriver
+      #   export PATH=$PATH:$PWD/geckodriver
       npm install sqlite3
       pip install "attrs>=17.4.0"
   displayName: 'Before Install'
