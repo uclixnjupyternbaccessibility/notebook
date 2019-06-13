@@ -49,7 +49,7 @@ steps:
       mkdir geckodriver
       tar -xzf geckodriver-v0.19.1-linux64.tar.gz -C geckodriver
       cd geckodriver
-      cp geckodriver /usr/local/bin
+      sudo cp geckodriver /usr/local/bin
       cd ..
       #   export PATH=$PATH:$PWD/geckodriver
       npm install sqlite3
@@ -77,12 +77,12 @@ steps:
       else
           true
       fi
-      python -m notebook.jstest base
+      #   python -m notebook.jstest base
       # python -m notebook.jstest python
-      python -m notebook.jstest notebook
-      python -m notebook.jstest services
+      #   python -m notebook.jstest notebook
+      #   python -m notebook.jstest services
 
-      nosetests -v --exclude-dir notebook/tests/selenium --with-coverage --cover-package=notebook notebook
+      # nosetests -v --exclude-dir notebook/tests/selenium --with-coverage --cover-package=notebook notebook
       py.test -sv notebook/tests/selenium
      
       #   make -C docs/ html || EXIT_STATUS=$?
