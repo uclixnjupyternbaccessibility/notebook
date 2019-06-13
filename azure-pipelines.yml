@@ -11,16 +11,6 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
-strategy:
-  matrix:
-      set_path:
-        path_1: PATH=$TRAVIS_BUILD_DIR/pandoc:$PATH
-      set_to_notebook:
-        env_1: GROUP=js/notebook
-        env_2: GROUP=python
-        env_3: GROUP=js/base
-        env_4: GROUP=js/services
-
 steps:
 - task: UsePythonVersion@0
   inputs:
@@ -43,7 +33,8 @@ steps:
       cd ..
       echo 'casperjs and phantomjs installed'
       
-      apt-get install firefox
+      sudo apt-get install firefox
+      echo 'FIREFOX INSTALLED'
       wget https://github.com/laurentj/slimerjs/releases/download/1.0.0/slimerjs-1.0.0.tar.bz2
       tar -xvjf slimerjs-1.0.0.tar.bz2
       cd slimerjs-1.0.0
