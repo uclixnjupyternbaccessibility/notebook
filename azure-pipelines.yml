@@ -82,8 +82,8 @@ steps:
       python -m notebook.jstest notebook
       python -m notebook.jstest services
 
-      # nosetests -v --exclude-dir notebook/tests/selenium --with-coverage --cover-package=notebook notebook
-      # py.test -sv notebook/tests/selenium
+      nosetests -v --exclude-dir notebook/tests/selenium --with-coverage --cover-package=notebook notebook
+      py.test -sv notebook/tests/selenium
       # |
       # if [[ $GROUP == docs ]]; then
       #   EXIT_STATUS=0
