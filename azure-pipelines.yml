@@ -84,8 +84,8 @@ steps:
       fi
       python -m notebook.jstest base
       # python -m notebook.jstest python
-      # python -m notebook.jstest js/base
-      # python -m notebook.jstest js/services
+      python -m notebook.jstest notebook
+      python -m notebook.jstest services
 
       # nosetests -v --exclude-dir notebook/tests/selenium --with-coverage --cover-package=notebook notebook
       # py.test -sv notebook/tests/selenium
