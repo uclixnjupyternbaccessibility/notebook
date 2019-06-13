@@ -81,20 +81,14 @@ steps:
       else
           true
       fi
-      #   python -m notebook.jstest base
-      # python -m notebook.jstest python
-      #   python -m notebook.jstest notebook
-      #   python -m notebook.jstest services
+      python -m notebook.jstest base
+      python -m notebook.jstest notebook
+      python -m notebook.jstest services
 
-      # nosetests -v --exclude-dir notebook/tests/selenium --with-coverage --cover-package=notebook notebook
-      py.test -sv notebook/tests/selenium
+      nosetests -v --exclude-dir notebook/tests/selenium --with-coverage --cover-package=notebook notebook
+      # py.test -sv notebook/tests/selenium
      
-      #   make -C docs/ html || EXIT_STATUS=$?
-      #   if [[ $TRAVIS_EVENT_TYPE == cron ]]; then
-      #     make -C docs/ linkcheck || EXIT_STATUS=$?;
-      #   fi
-      #   pytest --nbval --current-env docs || EXIT_STATUS=$?
-      #   exit $EXIT_STATUS
-      # fi
+      make -C docs/ html
+      pytest --nbval --current-env docs
   displayName: 'Run Tests'
   continueOnError: false
