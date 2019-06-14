@@ -69,32 +69,7 @@ steps:
       else
           true
       fi
-      python -m notebook.jstest base
-  displayName: 'Run base Tests'
+      py.test -sv notebook/tests/selenium
+  displayName: 'Run selenium Tests'
   continueOnError: false
 
-- script: |
-      python -m notebook.jstest notebook
-  displayName: 'Run notebook Tests'
-  continueOnError: false
-
-# - script: |
-#       python -m notebook.jstest services
-#   displayName: 'Run services Tests'
-#   continueOnError: false
-
-- script: |
-      nosetests -v --exclude-dir notebook/tests/selenium --with-coverage --cover-package=notebook notebook
-  displayName: 'Run coverage Tests'
-  continueOnError: false
-
-# - script: |
-#       py.test -sv notebook/tests/selenium
-#   displayName: 'Run selenium Tests'
-#   continueOnError: false
-
-- script: |
-      make -C docs/ html
-      pytest --nbval --current-env docs
-  displayName: 'Run documentation Tests'
-  continueOnError: false
