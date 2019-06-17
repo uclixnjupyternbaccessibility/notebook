@@ -60,20 +60,20 @@ steps:
   displayName: 'Install'
   continueOnError: false
 
-- script: |
-      jupyter kernelspec list
-      symlinks=$(find . -type l| grep -v './node_modules/' | grep -v './git-hooks')
-      if [[ $(echo $symlinks) ]]; then
-          echo "Repository contains symlinks which won't work on windows:"
-          echo $symlinks
-          echo ""
-          false
-      else
-          true
-      fi
-      python -m notebook.jstest base
-  displayName: 'Run base Tests'
-  continueOnError: false
+# - script: |
+#       jupyter kernelspec list
+#       symlinks=$(find . -type l| grep -v './node_modules/' | grep -v './git-hooks')
+#       if [[ $(echo $symlinks) ]]; then
+#           echo "Repository contains symlinks which won't work on windows:"
+#           echo $symlinks
+#           echo ""
+#           false
+#       else
+#           true
+#       fi
+#       python -m notebook.jstest base
+#   displayName: 'Run base Tests'
+#   continueOnError: false
 
 - script: |
       python -m notebook.jstest notebook
