@@ -935,10 +935,10 @@ define([
      * @param {Cell} [cell] - Cell to enter command mode on.
      */
     Notebook.prototype.handle_command_mode = function (cell) {
+        $('span[class*="sr-only"]').attr('title', 'Command Mode');
         if (this.mode !== 'command') {
             cell.command_mode();
             this.mode = 'command';
-            $('div[class*="code_cell"]')
             this.events.trigger('command_mode.Notebook');
             this.keyboard_manager.command_mode();
         }
@@ -962,11 +962,11 @@ define([
      * @param {Cell} [cell] Cell to enter edit mode on.
      */
     Notebook.prototype.handle_edit_mode = function (cell) {
+        $('span[class*="sr-only"]').attr('title', 'Edit Mode');
         this._contract_selection();
         if (cell && this.mode !== 'edit') {
             cell.edit_mode();
             this.mode = 'edit';
-            $('div[class*="code_cell"]')
             this.events.trigger('edit_mode.Notebook');
             this.keyboard_manager.edit_mode();
         }

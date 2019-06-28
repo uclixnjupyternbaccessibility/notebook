@@ -158,6 +158,8 @@ define([
         var cell =  $('<div></div>').addClass('cell code_cell');
         cell.attr('tabindex','2');
 
+        $('<span/>').addClass('sr-only').attr('aria-live', 'assertive').appendTo(cell);
+
         var input = $('<div></div>').addClass('input');
         this.input = input;
 
