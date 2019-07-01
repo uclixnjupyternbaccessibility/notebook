@@ -89,7 +89,7 @@ define([
         this.config = options.config;
         this.config.loaded.then(this.validate_config.bind(this));
         this.class_config = new configmod.ConfigWithDefaults(this.config,
-            Notebook.options_default, 'Notebook');
+                                        Notebook.options_default, 'Notebook');
         this.base_url = options.base_url;
         this.notebook_path = options.notebook_path;
         this.notebook_name = options.notebook_name;
@@ -243,9 +243,9 @@ define([
         });
 
         this.class_config.get('Toolbar').then(function(toolbar) {
-            if (toolbar === false) {
-                that.keyboard_manager.actions.call('jupyter-notebook:hide-toolbar');
-            }
+          if (toolbar === false) {
+              that.keyboard_manager.actions.call('jupyter-notebook:hide-toolbar');
+          }
         });
 
         // prevent assign to miss-typed properties.
@@ -302,8 +302,8 @@ define([
             if (data.replace) {
                 data.cell.set_text(data.text);
                 if (data.clear_output !== false) {
-                    // default (undefined) is true to preserve prior behavior
-                    data.cell.clear_output();
+                  // default (undefined) is true to preserve prior behavior
+                  data.cell.clear_output();
                 }
             } else {
                 var index = that.find_cell_index(data.cell);
@@ -480,8 +480,8 @@ define([
         var orig_vs = v + this.nbformat_minor;
         var this_vs = v + this.current_nbformat_minor;
         var msg = i18n.msg.sprintf(i18n.msg._("This notebook is version %1$s, but we only fully support up to %2$s."),
-            orig_vs,this_vs) + " " +
-            i18n.msg._("You can still work with this notebook, but cell and output types introduced in later notebook versions will not be available.");
+                orig_vs,this_vs) + " " +
+                i18n.msg._("You can still work with this notebook, but cell and output types introduced in later notebook versions will not be available.");
 
         // This statement is used simply so that message extraction
         // will pick up the strings.  The actual setting of the text
@@ -935,14 +935,11 @@ define([
      * @param {Cell} [cell] - Cell to enter command mode on.
      */
     Notebook.prototype.handle_command_mode = function (cell) {
-
-
         if (this.mode !== 'command') {
-
             $('div[class*="code_cell"]').attr('aria-label', 'Command Mode').attr('aria-live', 'assertive');
-            // $('div[class*="input_area"]').attr('aria-label', 'Command Mode');
             cell.command_mode();
             this.mode = 'command';
+            $('div[class*="code_cell"]')
             this.events.trigger('command_mode.Notebook');
             this.keyboard_manager.command_mode();
         }
@@ -966,13 +963,12 @@ define([
      * @param {Cell} [cell] Cell to enter edit mode on.
      */
     Notebook.prototype.handle_edit_mode = function (cell) {
-
         this._contract_selection();
         if (cell && this.mode !== 'edit') {
-            // $('div[class*="input_area"]').attr('aria-label', 'Edit Mode, edit code here');
             $('div[class*="code_cell"]').removeAttr('aria-label');
             cell.edit_mode();
             this.mode = 'edit';
+            $('div[class*="code_cell"]')
             this.events.trigger('edit_mode.Notebook');
             this.keyboard_manager.edit_mode();
         }
@@ -1314,19 +1310,19 @@ define([
                 tooltip: this.tooltip
             };
             switch(type) {
-                case 'code':
-                    cell = new codecell.CodeCell(this.kernel, cell_options);
-                    cell.set_input_prompt();
-                    break;
-                case 'markdown':
-                    cell = new textcell.MarkdownCell(cell_options);
-                    break;
-                case 'raw':
-                    cell = new textcell.RawCell(cell_options);
-                    break;
-                default:
-                    console.log("Unrecognized cell type: ", type, cellmod);
-                    cell = new cellmod.UnrecognizedCell(cell_options);
+            case 'code':
+                cell = new codecell.CodeCell(this.kernel, cell_options);
+                cell.set_input_prompt();
+                break;
+            case 'markdown':
+                cell = new textcell.MarkdownCell(cell_options);
+                break;
+            case 'raw':
+                cell = new textcell.RawCell(cell_options);
+                break;
+            default:
+                console.log("Unrecognized cell type: ", type, cellmod);
+                cell = new cellmod.UnrecognizedCell(cell_options);
             }
 
             if(this._insert_element_at_index(cell.element,index)) {
@@ -1476,7 +1472,7 @@ define([
      *
      * @param {Array} indices - cell indices to convert
      */
-    Notebook.prototype.cells_to_markdown = function (indices) {
+     Notebook.prototype.cells_to_markdown = function (indices) {
         if (indices === undefined) {
             indices = this.get_selected_cells_indices();
         }
@@ -1484,7 +1480,7 @@ define([
         for(var i=0; i < indices.length; i++) {
             this.to_markdown(indices[i]);
         }
-    };
+     };
 
     /**
      * Turn a cell into a Markdown cell.
@@ -1530,7 +1526,7 @@ define([
      *
      * @param {Array} indices - cell indices to convert
      */
-    Notebook.prototype.cells_to_raw = function (indices) {
+     Notebook.prototype.cells_to_raw = function (indices) {
         if (indices === undefined) {
             indices = this.get_selected_cells_indices();
         }
@@ -1538,7 +1534,7 @@ define([
         for(var i=0; i < indices.length; i++) {
             this.to_raw(indices[i]);
         }
-    };
+     };
 
     /**
      * Turn a cell into a raw text cell.
@@ -1589,7 +1585,7 @@ define([
             type : $("<h1/>"),
             body : $("<p/>").text(
                 i18n.msg._('Jupyter no longer uses special heading cells. ' +
-                    'Instead, write your headings in Markdown cells using # characters:')
+                'Instead, write your headings in Markdown cells using # characters:')
             ).append($('<pre/>').text(
                 i18n.msg._('## This is a level 2 heading')
             )),
@@ -1906,10 +1902,10 @@ define([
     Notebook.prototype.copy_cell_attachments = function() {
         var cell = this.get_selected_cell();
         if (cell.attachments !== undefined) {
-            // Do a deep copy of attachments to avoid subsequent modification
-            // to the cell to modify the clipboard
-            this.clipboard_attachments = $.extend(true, {}, cell.attachments);
-            this.enable_attachments_paste();
+          // Do a deep copy of attachments to avoid subsequent modification
+          // to the cell to modify the clipboard
+          this.clipboard_attachments = $.extend(true, {}, cell.attachments);
+          this.enable_attachments_paste();
         }
     };
 
@@ -1922,7 +1918,7 @@ define([
             this.paste_attachments_enabled) {
             var cell = this.get_selected_cell();
             if (cell.attachments === undefined) {
-                cell.attachments = {};
+              cell.attachments = {};
             }
             // Do a deep copy so we can paste multiple times
             $.extend(true, cell.attachments, this.clipboard_attachments);
@@ -2040,7 +2036,7 @@ define([
      */
     Notebook.prototype.clear_cells_outputs = function(indices) {
         if (!indices) {
-            indices = this.get_selected_cells_indices();
+           indices = this.get_selected_cells_indices();
         }
 
         for (var i = 0; i < indices.length; i++){
@@ -2435,11 +2431,11 @@ define([
             /**
              * allow closing of new tabs in Chromium, impossible in FF
              */
-            window.open('', '_self', '');
-            window.close();
+                window.open('', '_self', '');
+                window.close();
         };
-        // finish with close on success or failure
-        this.session.delete(close_window, close_window);
+            // finish with close on success or failure
+            this.session.delete(close_window, close_window);
     };
 
     /**
@@ -2785,7 +2781,7 @@ define([
                     // This is configurable in nbconfig/notebook.json as `last_modified_check_margin`.
                     if ((last_modified.getTime() - that.last_modified.getTime()) > last_modified_check_margin) {
                         console.warn("Last saving was done on `"+that.last_modified+"`("+that._last_modified+"), "+
-                            "while the current file seem to have been saved on `"+data.last_modified+"`");
+                                    "while the current file seem to have been saved on `"+data.last_modified+"`");
                         if (that._changed_on_disk_dialog !== null) {
                             // update save callback on the confirmation button
                             that._changed_on_disk_dialog.find('.save-confirm-btn').click(_save);
@@ -2794,30 +2790,30 @@ define([
                             // redisplay existing dialog
                             that._changed_on_disk_dialog.modal('show');
                         } else {
-                            // create new dialog
-                            that._changed_on_disk_dialog = dialog.modal({
-                                notebook: that,
-                                keyboard_manager: that.keyboard_manager,
-                                title: i18n.msg._("Notebook changed"),
-                                body: i18n.msg._("The notebook file has changed on disk since the last time we opened or saved it. "
-                                    + "Do you want to overwrite the file on disk with the version open here, or load "
-                                    + "the version on disk (reload the page)?"),
-                                buttons: {
-                                    Reload: {
-                                        class: 'btn-warning',
-                                        click: function() {
-                                            window.location.reload();
-                                        }
-                                    },
-                                    Cancel: {},
-                                    Overwrite: {
-                                        class: 'btn-danger save-confirm-btn',
-                                        click: function () {
-                                            _save();
-                                        }
-                                    },
-                                }
-                            });
+                          // create new dialog
+                          that._changed_on_disk_dialog = dialog.modal({
+                            notebook: that,
+                            keyboard_manager: that.keyboard_manager,
+                            title: i18n.msg._("Notebook changed"),
+                            body: i18n.msg._("The notebook file has changed on disk since the last time we opened or saved it. "
+                                  + "Do you want to overwrite the file on disk with the version open here, or load "
+                                  + "the version on disk (reload the page)?"),
+                            buttons: {
+                                Reload: {
+                                    class: 'btn-warning',
+                                    click: function() {
+                                        window.location.reload();
+                                    }
+                                },
+                                Cancel: {},
+                                Overwrite: {
+                                    class: 'btn-danger save-confirm-btn',
+                                    click: function () {
+                                        _save();
+                                    }
+                                },
+                            }
+                          });
                         }
                     } else {
                         return _save();
@@ -2850,8 +2846,8 @@ define([
 
             body.append($("<p>").text(
                 i18n.msg._("The save operation succeeded," +
-                    " but the notebook does not appear to be valid." +
-                    " The validation error was:")
+                " but the notebook does not appear to be valid." +
+                " The validation error was:")
             )).append($("<div>").addClass("validation-error").append(
                 $("<pre>").text(data.message)
             ));
@@ -2887,8 +2883,8 @@ define([
             $('<br/>')
         ).append(
             $('<input/>').attr('type','text').attr('size','25')
-                .attr('data-testid', 'save-as')
-                .addClass('form-control')
+            .attr('data-testid', 'save-as')
+            .addClass('form-control')
         );
 
         var d = dialog.modal({
@@ -2938,13 +2934,13 @@ define([
                                 title: 'Save As',
                                 body: warning_body,
                                 buttons: {Cancel: {},
-                                    Overwrite: {
-                                        class: 'btn-warning',
-                                        click: function() {
-                                            return save_thunk();
-                                        }
+                                Overwrite: {
+                                    class: 'btn-warning',
+                                    click: function() {
+                                        return save_thunk();
                                     }
                                 }
+                            }
                             });
                         }, function(err) {
                             return save_thunk();
@@ -2961,8 +2957,8 @@ define([
                     }
                 });
                 d.find('input[type="text"]').val(current_dir).focus();
-            }
-        });
+             }
+         });
     };
 
     /**
@@ -2988,23 +2984,26 @@ define([
     /**
      * Explicitly trust the output of this notebook.
      */
-    Notebook.prototype.trust_notebook = function () {
+    Notebook.prototype.trust_notebook = function (from_notification) {
         var body = $("<div>").append($("<p>")
             .text(i18n.msg._("A trusted Jupyter notebook may execute hidden malicious code when you open it. " +
-                "Selecting trust will immediately reload this notebook in a trusted state. " +
-                "For more information, see the Jupyter security documentation: "))
+                    "Selecting trust will immediately reload this notebook in a trusted state. " +
+                    "For more information, see the Jupyter security documentation: "))
             .append($("<a>").attr("href", "https://jupyter-notebook.readthedocs.io/en/latest/security.html")
                 .text(i18n.msg._("here"))
             )
         );
-
+        var fb = '';
+        if(from_notification === 'Notification_button') {
+            fb = 'notification_trusted';
+        }
         var nb = this;
         dialog.modal({
             notebook: this,
             keyboard_manager: this.keyboard_manager,
             title: i18n.msg._("Trust this notebook?"),
             body: body,
-            focus_button: 'notification_trusted',
+            focus_button: fb,
 
             buttons: {
                 Cancel : {},
@@ -3018,7 +3017,7 @@ define([
                                 cell.output_area.trusted = true;
                             }
                         }
-                        // If its write only and dirty, save before 
+                        // If its write only and dirty, save before
                         // trusting
                         var pr;
                         if(nb.writable && nb.dirty) {
@@ -3029,12 +3028,12 @@ define([
                         }
                         return pr.then(function() {
                             nb.contents.trust(nb.notebook_path)
-                                .then(function() {
-                                    nb.events.trigger("trust_changed.Notebook", true);
-                                    window.location.reload();
-                                }, function(err) {
-                                    console.log(err);
-                                });
+                            .then(function() {
+                                nb.events.trigger("trust_changed.Notebook", true);
+                                window.location.reload();
+                            }, function(err) {
+                                console.log(err);
+                            });
                         });
                     }
                 }
@@ -3167,7 +3166,7 @@ define([
                     msg = i18n.msg._("The notebook also failed validation:");
                 } else {
                     msg = i18n.msg._("An invalid notebook may not function properly." +
-                        " The validation error was:");
+                    " The validation error was:");
                 }
                 body.append($("<p>").text(
                     msg
@@ -3206,9 +3205,9 @@ define([
         var orig_nbformat_minor = nbmodel.metadata.orig_nbformat_minor;
         if (orig_nbformat !== undefined && nbmodel.nbformat !== orig_nbformat) {
             var oldmsg = i18n.msg._("This notebook has been converted from an older notebook format" +
-                " to the current notebook format v(%s).");
+            " to the current notebook format v(%s).");
             var newmsg = i18n.msg._("This notebook has been converted from a newer notebook format" +
-                " to the current notebook format v(%s).");
+            " to the current notebook format v(%s).");
             if (nbmodel.nbformat > orig_nbformat) {
                 msg = i18n.msg.sprintf(oldmsg,nbmodel.nbformat);
             } else {
@@ -3216,7 +3215,7 @@ define([
             }
             msg += " ";
             msg += i18n.msg._("The next time you save this notebook, the " +
-                "current notebook format will be used.");
+            "current notebook format will be used.");
 
             msg += " ";
             if (nbmodel.nbformat > orig_nbformat) {
@@ -3254,7 +3253,7 @@ define([
                 this.kernel_selector.set_kernel({
                     name: i18n.msg._("(No name)"),
                     language: this.metadata.language
-                });
+                  });
                 // this should be stored in kspec now, delete it.
                 // remove once we do not support notebook v3 anymore.
                 delete this.metadata.language;
@@ -3302,8 +3301,8 @@ define([
         if (error.name === utils.XHR_ERROR && error.xhr.status === 500) {
             utils.log_ajax_error(error.xhr, error.xhr_status, error.xhr_error);
             msg = i18n.msg.sprintf(i18n.msg._("An unknown error occurred while loading this notebook. " +
-                "This version can load notebook formats %s or earlier. See the server log for details.",
-                "v" + this.nbformat));
+            "This version can load notebook formats %s or earlier. See the server log for details.",
+            "v" + this.nbformat));
         } else {
             msg = error.message;
             console.warn('Error stack trace while loading notebook was:');
@@ -3326,8 +3325,8 @@ define([
                         window.close();
                     }
                 }
-            },
-            sanitize: isSanitized
+              },
+              sanitize: isSanitized
 
         });
     };
@@ -3426,7 +3425,7 @@ define([
         var body = $('<div/>').append(
             $('<p/>').addClass("p-space").text(
                 i18n.msg._("Are you sure you want to revert the notebook to " +
-                    "the latest checkpoint?")
+                "the latest checkpoint?")
             ).append(
                 $("<strong/>").text(" "+i18n.msg._("This cannot be undone."))
             )
