@@ -158,7 +158,7 @@ define([
         var cell =  $('<div></div>').addClass('cell code_cell');
         cell.attr('tabindex','2');
 
-        var input = $('<div></div>').addClass('input').attr('aria-label', 'Edit Mode, edit code here');;
+        var input = $('<div></div>').addClass('input')
         this.input = input;
 
         var prompt_container = $('<div/>').addClass('prompt_container');
@@ -178,7 +178,7 @@ define([
             cell: this, 
             notebook: this.notebook});
         inner_cell.append(this.celltoolbar.element);
-        var input_area = $('<div/>').addClass('input_area');
+        var input_area = $('<div/>').addClass('input_area').attr('aria-label', 'Edit Mode, edit code here');
         this.code_mirror = new CodeMirror(input_area.get(0), this._options.cm_config);
         // In case of bugs that put the keyboard manager into an inconsistent state,
         // ensure KM is enabled when CodeMirror is focused:
