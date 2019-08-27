@@ -196,10 +196,10 @@ define([
                         var new_tags = preprocess_input(textarea[0].value);
                         var added_tags = array_difference(new_tags, old_tags);
                         var removed_tags = array_difference(old_tags, new_tags);
-                        for (var i=0; i < added_tags.length; ++i) {
+                        for (var i = 0; i < added_tags.length; ++i) {
                             on_add(added_tags[i]);
                         }
-                        for (var i=0; i < removed_tags.length; ++i) {
+                        for (var i = 0; i < removed_tags.length; ++i) {
                             on_remove(removed_tags[i]);
                         }
                     }
